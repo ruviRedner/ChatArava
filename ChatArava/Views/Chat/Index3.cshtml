@@ -1,0 +1,64 @@
+﻿@model ChatArava.Models.ViewModel.ChatView
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Arava</h1>
+
+<p>
+    <a asp-action="Logout">Logout</a>
+    <br />
+    
+    
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+             Id
+            </th>
+            <th>
+               Text
+            </th>
+            <th>
+                TimeStemp
+            </th>
+            <th>
+                senderName
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Messages) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.textContent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.timeStentd)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sender.nicName)
+                </td>
+              
+           @*  <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td> *@
+        </tr>
+}
+    </tbody>
+</table>
+<form asp-action="SendMessage">
+    <div class="form-group">
+        <label asp-for="Message.textContent" class="control-label"></label>
+        <input asp-for="Message.textContent" class="form-control" />
+
+        <input type="submit" value="send" class="btn btn-primary form-control mt-3" />
+    </div>
+</form>
